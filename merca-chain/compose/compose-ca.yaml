@@ -21,12 +21,16 @@ services:
       - FABRIC_CA_SERVER_TLS_ENABLED=true
       - FABRIC_CA_SERVER_PORT=7054
       - FABRIC_CA_SERVER_OPERATIONS_LISTENADDRESS=0.0.0.0:17054
+      - SOFTHSM2_CONF=/etc/hyperledger/softhsm/softhsm2.conf
     ports:
       - "7054:7054"
       - "17054:17054"
     command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
     volumes:
       - ../organizations/fabric-ca/org1:/etc/hyperledger/fabric-ca-server
+      - /usr/lib/softhsm/libsofthsm2.so:/etc/hyperledger/softhsm/libsofthsm2.so
+      - /home/daniel/tokens:/etc/hyperledger/softhsm/tokens
+      - ./softhsm2.conf:/etc/hyperledger/softhsm/softhsm2.conf
     container_name: ca_org1
     networks:
       - test
@@ -41,12 +45,16 @@ services:
       - FABRIC_CA_SERVER_TLS_ENABLED=true
       - FABRIC_CA_SERVER_PORT=8054
       - FABRIC_CA_SERVER_OPERATIONS_LISTENADDRESS=0.0.0.0:18054
+      - SOFTHSM2_CONF=/etc/hyperledger/softhsm/softhsm2.conf
     ports:
       - "8054:8054"
       - "18054:18054"
     command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
     volumes:
       - ../organizations/fabric-ca/org2:/etc/hyperledger/fabric-ca-server
+      - /usr/lib/softhsm/libsofthsm2.so:/etc/hyperledger/softhsm/libsofthsm2.so
+      - /home/daniel/tokens:/etc/hyperledger/softhsm/tokens
+      - ./softhsm2.conf:/etc/hyperledger/softhsm/softhsm2.conf
     container_name: ca_org2
     networks:
       - test
@@ -61,12 +69,16 @@ services:
       - FABRIC_CA_SERVER_TLS_ENABLED=true
       - FABRIC_CA_SERVER_PORT=9054
       - FABRIC_CA_SERVER_OPERATIONS_LISTENADDRESS=0.0.0.0:19054
+      - SOFTHSM2_CONF=/etc/hyperledger/softhsm/softhsm2.conf
     ports:
       - "9054:9054"
       - "19054:19054"
     command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
     volumes:
       - ../organizations/fabric-ca/ordererOrg:/etc/hyperledger/fabric-ca-server
+      - /usr/lib/softhsm/libsofthsm2.so:/etc/hyperledger/softhsm/libsofthsm2.so
+      - /home/daniel/tokens:/etc/hyperledger/softhsm/tokens
+      - ./softhsm2.conf:/etc/hyperledger/softhsm/softhsm2.conf
     container_name: ca_orderer
     networks:
       - test
